@@ -1,5 +1,8 @@
 package io.platformengineer.demo.model.redis;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import io.platformengineer.demo.model.generics.IStudent;
@@ -20,20 +23,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(staticName = "of")
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
-@Document
+@Document(prefixes = {"io.platformengineer.demo.model.redis.StudentRedis:", "student:"})
 @TypeAlias("StudentRedis")
 public class StudentRedis  {
 
     @Id
-    @Indexed
     private String id;
 
     // Indexed for exact text matching
     @Indexed @NonNull
-    private String firstName;
+    private String first_name;
 
     @Indexed @NonNull
-    private String lastName;
+    private String last_name;
 
     @Indexed @NonNull
     private Integer age;

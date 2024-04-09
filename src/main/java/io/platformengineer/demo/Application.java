@@ -11,6 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 import java.time.LocalDateTime;
@@ -18,6 +20,8 @@ import java.util.List;
 
 @EnableRedisDocumentRepositories(basePackages = "io.platformengineer.demo.*")
 @SpringBootApplication
+@EnableScheduling
+@EnableTransactionManagement
 public class Application {
 
     public static void main(String[] args) {
@@ -38,11 +42,12 @@ public class Application {
                 int age = faker.number().numberBetween(18, 30); // Random age between 18 and 30
                 String email = faker.internet().emailAddress();
 
-                StudentRedis studentRedis = StudentRedis.of(firstName, lastName, age, email);
+                    StudentRedis studentRedis = StudentRedis.of(firstName, lastName, age, email);
                 repo.save(studentRedis);
             }
         };
     }
+
 
     @Bean
     CommandLineRunner commandLineRunner(
